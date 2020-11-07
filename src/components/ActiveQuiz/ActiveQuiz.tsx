@@ -6,17 +6,26 @@ import {IAnswers, IQuestion, IonAnswerClick} from '../../types';
 interface IActiveQuiz extends IAnswers {
   question: IQuestion;
   onAnswerClick: IonAnswerClick;
+  answerNumber: number;
+  quizLength: number;
 }
 
-const ActiveQuiz: React.FC<IActiveQuiz> = ({answers, question, onAnswerClick}) => {
+const ActiveQuiz: React.FC<IActiveQuiz> = ({
+    answers,
+    question,
+    onAnswerClick,
+    answerNumber,
+    quizLength,
+  }) => {
+
   return (
     <div className={styles.activeQuiz}>
       <p className={styles.question}>
         <span>
-          <strong>1.</strong> {question}
+          <strong>{answerNumber}.</strong> {question}
         </span>
 
-        <small>4 из 12</small>
+        <small>{answerNumber} из {quizLength}</small>
       </p>
 
       <AnswersList
