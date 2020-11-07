@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './activeQuiz.module.css';
+import AnswersList from './AnswersList';
+import {IAnswers} from '../../types';
 
-const ActiveQuiz: React.FC = (props) => {
+const ActiveQuiz: React.FC<IAnswers> = ({answers}) => {
   return (
     <div className={styles.activeQuiz}>
       <p className={styles.question}>
@@ -12,12 +14,9 @@ const ActiveQuiz: React.FC = (props) => {
         <small>4 из 12</small>
       </p>
 
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-      </ul>
+      <AnswersList
+        answers={answers}
+      />
     </div>
   )
 }
