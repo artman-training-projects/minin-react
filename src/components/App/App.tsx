@@ -1,12 +1,11 @@
 import React from 'react';
 import Layout from '../../hoc/Layout'
+import Quiz from '../../containers/Quiz';
 
 const App: React.FC = () => {
   return (
     <Layout>
-      <div className="App">
-        <h1>React App in Layout</h1>
-      </div>
+      <Quiz />
     </Layout>
   );
 }
