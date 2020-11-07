@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './activeQuiz.module.css';
 import AnswersList from './AnswersList';
-import {IAnswers, IQuestion, IonAnswerClick} from '../../types';
+import { IAnswers, IQuestion, IonAnswerClick } from '../../types';
 
 interface IActiveQuiz extends IAnswers {
   question: IQuestion;
@@ -11,13 +11,12 @@ interface IActiveQuiz extends IAnswers {
 }
 
 const ActiveQuiz: React.FC<IActiveQuiz> = ({
-    answers,
-    question,
-    onAnswerClick,
-    answerNumber,
-    quizLength,
-  }) => {
-
+  answers,
+  question,
+  onAnswerClick,
+  answerNumber,
+  quizLength,
+}) => {
   return (
     <div className={styles.activeQuiz}>
       <p className={styles.question}>
@@ -25,15 +24,14 @@ const ActiveQuiz: React.FC<IActiveQuiz> = ({
           <strong>{answerNumber}.</strong> {question}
         </span>
 
-        <small>{answerNumber} из {quizLength}</small>
+        <small>
+          {answerNumber} из {quizLength}
+        </small>
       </p>
 
-      <AnswersList
-        answers={answers}
-        onAnswerClick={onAnswerClick}
-      />
+      <AnswersList answers={answers} onAnswerClick={onAnswerClick} />
     </div>
-  )
-}
+  );
+};
 
 export default ActiveQuiz;
