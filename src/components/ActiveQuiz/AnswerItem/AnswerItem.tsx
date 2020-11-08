@@ -5,11 +5,21 @@ import { IAnswer, IonAnswerClick } from '../../../types';
 interface IAnswerItem {
   answer: IAnswer;
   onAnswerClick: IonAnswerClick;
+  answerState: string | null;
 }
 
-const AnswerItem: React.FC<IAnswerItem> = ({ answer, onAnswerClick }) => {
+const AnswerItem: React.FC<IAnswerItem> = ({
+  answer,
+  onAnswerClick,
+  answerState,
+}) => {
+  const classes = [styles.answerItem];
+  if (answerState) {
+    classes.push(styles[answerState]);
+  }
+
   return (
-    <li className={styles.answerItem} onClick={() => onAnswerClick(answer.id)}>
+    <li className={classes.join(' ')} onClick={() => onAnswerClick(answer.id)}>
       {answer.text}
     </li>
   );

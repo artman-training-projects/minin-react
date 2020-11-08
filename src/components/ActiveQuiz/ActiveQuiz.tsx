@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './activeQuiz.module.css';
 import AnswersList from './AnswersList';
-import { IAnswers, IQuestion, IonAnswerClick } from '../../types';
+import { IAnswers, IQuestion, IonAnswerClick, IAnswerState } from '../../types';
 
 interface IActiveQuiz extends IAnswers {
   question: IQuestion;
   onAnswerClick: IonAnswerClick;
   answerNumber: number;
   quizLength: number;
+  answerState: IAnswerState | null;
 }
 
 const ActiveQuiz: React.FC<IActiveQuiz> = ({
@@ -16,6 +17,7 @@ const ActiveQuiz: React.FC<IActiveQuiz> = ({
   onAnswerClick,
   answerNumber,
   quizLength,
+  answerState,
 }) => {
   return (
     <div className={styles.activeQuiz}>
@@ -29,7 +31,11 @@ const ActiveQuiz: React.FC<IActiveQuiz> = ({
         </small>
       </p>
 
-      <AnswersList answers={answers} onAnswerClick={onAnswerClick} />
+      <AnswersList
+        answers={answers}
+        onAnswerClick={onAnswerClick}
+        answerState={answerState}
+      />
     </div>
   );
 };

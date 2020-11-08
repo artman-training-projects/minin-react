@@ -4,8 +4,9 @@ import ActiveQuiz from '../../components/ActiveQuiz';
 import { IonAnswerClick } from '../../types';
 
 class Quiz extends Component {
-  state = {
+  state: any = {
     activeQuestion: 0,
+    answerState: null,
     quiz: [
       {
         question: 'Какого цвета небо?',
@@ -33,14 +34,46 @@ class Quiz extends Component {
   };
 
   onAnswerClickHandler: IonAnswerClick = (answerId: number) => {
-    console.log('Answer Id:', answerId);
+    if (this.state.answerState) {
+      const key = Object.keys(this.state.answerState)[0];
+      if (this.state.answerState[key] === 'success') {
+        return;
+      }
+    }
 
     const question = this.state.quiz[this.state.activeQuestion];
 
-    this.setState({
-      activeQuestion: this.state.activeQuestion + 1,
-    });
+    if (question.rightAnswerId === answerId) {
+      this.setState({
+        answerState: {
+          [answerId]: 'success',
+        },
+      });
+
+      const timeout = window.setTimeout(() => {
+        if (this.isQuizFinished()) {
+          console.log('finished');
+        } else {
+          this.setState({
+            activeQuestion: this.state.activeQuestion + 1,
+            answerState: null,
+          });
+        }
+
+        window.clearTimeout(timeout);
+      }, 1000);
+    } else {
+      this.setState({
+        answerState: {
+          [answerId]: 'error',
+        },
+      });
+    }
   };
+
+  isQuizFinished() {
+    return this.state.activeQuestion + 1 === this.state.quiz.length;
+  }
 
   render() {
     return (
@@ -54,6 +87,7 @@ class Quiz extends Component {
             quizLength={this.state.quiz.length}
             answerNumber={this.state.activeQuestion + 1}
             onAnswerClick={this.onAnswerClickHandler}
+            answerState={this.state.answerState}
           />
         </div>
       </div>
