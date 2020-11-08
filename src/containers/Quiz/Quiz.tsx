@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styles from './quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz';
+import FinishedQuiz from '../../components/FinishedQuiz';
 import { IonAnswerClick } from '../../types';
 
 class Quiz extends Component {
   state: any = {
+    isFinished: true,
     activeQuestion: 0,
     answerState: null,
     quiz: [
@@ -52,7 +54,9 @@ class Quiz extends Component {
 
       const timeout = window.setTimeout(() => {
         if (this.isQuizFinished()) {
-          console.log('finished');
+          this.setState({
+            isFinished: true,
+          });
         } else {
           this.setState({
             activeQuestion: this.state.activeQuestion + 1,
@@ -81,14 +85,18 @@ class Quiz extends Component {
         <div className={styles.quizWrapper}>
           <h1>Ответьте на все вопросы</h1>
 
-          <ActiveQuiz
-            answers={this.state.quiz[this.state.activeQuestion].answers}
-            question={this.state.quiz[this.state.activeQuestion].question}
-            quizLength={this.state.quiz.length}
-            answerNumber={this.state.activeQuestion + 1}
-            onAnswerClick={this.onAnswerClickHandler}
-            answerState={this.state.answerState}
-          />
+          {this.state.isFinished ? (
+            <FinishedQuiz />
+          ) : (
+            <ActiveQuiz
+              answers={this.state.quiz[this.state.activeQuestion].answers}
+              question={this.state.quiz[this.state.activeQuestion].question}
+              quizLength={this.state.quiz.length}
+              answerNumber={this.state.activeQuestion + 1}
+              onAnswerClick={this.onAnswerClickHandler}
+              answerState={this.state.answerState}
+            />
+          )}
         </div>
       </div>
     );
