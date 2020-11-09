@@ -1,30 +1,48 @@
 import React from 'react';
 import styles from './finishedQuiz.module.css';
+import { IQuiz, IResults } from '../../types';
 
 interface IFinishedQuiz {
-  props: any;
+  results: IResults;
+  quiz: IQuiz[];
+  onRetry: () => void;
 }
 
-const FinishedQuiz: React.FC = () => {
+const FinishedQuiz: React.FC<IFinishedQuiz> = ({ results, quiz, onRetry }) => {
+  const successCount = Object.keys(results).reduce((total, key) => {
+    if (results[key] === 'success') {
+      total++;
+    }
+
+    return total;
+  }, 0);
+
   return (
     <div className={styles.finishedQuiz}>
       <ul>
-        <li>
-          <strong>1. </strong>
-          Some text
-          <i className={'fa fa-times ' + styles.error} />
-        </li>
-        <li>
-          <strong>1. </strong>
-          Some text
-          <i className={'fa fa-check ' + styles.success} />
-        </li>
+        {quiz.map((quizItem: any, i: any) => {
+          const classes = [
+            'fa',
+            results[quizItem.id] === 'error' ? 'fa-times' : 'fa-check',
+            styles[results[quizItem.id]],
+          ];
+
+          return (
+            <li key={i}>
+              <strong>{i + 1}</strong>.&nbsp;
+              {quizItem.question}
+              <i className={classes.join(' ')} />
+            </li>
+          );
+        })}
       </ul>
 
-      <p>Правильно 4 из 10</p>
+      <p>
+        Правильно {successCount} из {quiz.length}
+      </p>
 
       <div>
-        <button>Повторить</button>
+        <button onClick={onRetry}>Повторить</button>
       </div>
     </div>
   );
