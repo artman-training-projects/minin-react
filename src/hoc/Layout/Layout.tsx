@@ -1,16 +1,39 @@
-import React, { ReactChild } from 'react';
+import React, { Component, ReactChild } from 'react';
 import styles from './layout.module.css';
+import MenuToggle from '../../components/Navigation/MenuToggle';
+import Drawer from '../../components/Navigation/Drawer';
 
-interface ILayout {
-  children: ReactChild;
+class Layout extends Component<any, any> {
+  state = {
+    menu: false,
+  };
+
+  toggleMenuHandler = () => {
+    this.setState({
+      menu: !this.state.menu,
+    });
+  };
+
+  menuCloseHandler = () => {
+    this.setState({
+      menu: false,
+    });
+  };
+
+  render() {
+    return (
+      <div className={styles.layout}>
+        <Drawer isOpen={this.state.menu} onClose={this.menuCloseHandler} />
+
+        <MenuToggle
+          isOpen={this.state.menu}
+          onToggle={this.toggleMenuHandler}
+        />
+
+        <main>{this.props.children}</main>
+      </div>
+    );
+  }
 }
-
-const Layout: React.FC<ILayout> = ({ children }) => {
-  return (
-    <div className={styles.layout}>
-      <main>{children}</main>
-    </div>
-  );
-};
 
 export default Layout;
