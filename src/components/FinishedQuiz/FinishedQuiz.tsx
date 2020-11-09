@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './finishedQuiz.module.css';
+import Button from '../UI/Button';
 import { IQuiz, IResults } from '../../types';
 
 interface IFinishedQuiz {
   results: IResults;
   quiz: IQuiz[];
-  onRetry: () => void;
+  onRetry: any;
 }
 
 const FinishedQuiz: React.FC<IFinishedQuiz> = ({ results, quiz, onRetry }) => {
@@ -42,7 +43,10 @@ const FinishedQuiz: React.FC<IFinishedQuiz> = ({ results, quiz, onRetry }) => {
       </p>
 
       <div>
-        <button onClick={onRetry}>Повторить</button>
+        <Button onClick={onRetry} type="primary">
+          Повторить
+        </Button>
+        <Button type="success">Перейти в список тестов</Button>
       </div>
     </div>
   );
