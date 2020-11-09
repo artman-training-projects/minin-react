@@ -12,8 +12,8 @@ const AnswerItem: React.FC<IAnswerItem> = ({
   answer,
   onAnswerClick,
   answerState,
-}) => {
-  const classes = [styles.answerItem];
+}): JSX.Element => {
+  const classes: Array<string> = [styles.answerItem];
   if (answerState) {
     classes.push(styles[answerState]);
   }

@@ -12,7 +12,7 @@ const AnswersList: React.FC<IAnswersList> = ({
   answers,
   onAnswerClick,
   answerState,
-}) => {
+}): JSX.Element => {
   return (
     <ul className={styles.answersList}>
       {answers.map((answer, index: number) => (

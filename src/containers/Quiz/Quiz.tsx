@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz';
 import FinishedQuiz from '../../components/FinishedQuiz';
-import { IonAnswerClick } from '../../types';
+import { IonAnswerClick, IQuiz, IResults } from '../../types';
 
 class Quiz extends Component {
   state: any = {
@@ -44,8 +44,8 @@ class Quiz extends Component {
       }
     }
 
-    const question = this.state.quiz[this.state.activeQuestion];
-    const results = this.state.results;
+    const question: IQuiz = this.state.quiz[this.state.activeQuestion];
+    const results: IResults = this.state.results;
 
     if (question.rightAnswerId === answerId) {
       if (!results[question.id]) {
@@ -59,7 +59,7 @@ class Quiz extends Component {
         results,
       });
 
-      const timeout = window.setTimeout(() => {
+      const timeout: number = window.setTimeout(() => {
         if (this.isQuizFinished()) {
           this.setState({
             isFinished: true,
@@ -84,11 +84,11 @@ class Quiz extends Component {
     }
   };
 
-  isQuizFinished() {
+  isQuizFinished(): boolean {
     return this.state.activeQuestion + 1 === this.state.quiz.length;
   }
 
-  retryHandler = () => {
+  retryHandler = (): void => {
     this.setState({
       activeQuestion: 0,
       answerState: null,
@@ -97,7 +97,7 @@ class Quiz extends Component {
     });
   };
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className={styles.quiz}>
         <div className={styles.quizWrapper}>

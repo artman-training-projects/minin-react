@@ -2,12 +2,15 @@ import React from 'react';
 import styles from './menuToggle.module.css';
 
 interface IMenuToggle {
-  isOpen: any;
-  onToggle: any;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
-const MenuToggle: React.FC<IMenuToggle> = ({ isOpen, onToggle }) => {
-  const classes = [styles.menuToggle, 'fa'];
+const MenuToggle: React.FC<IMenuToggle> = ({
+  isOpen,
+  onToggle,
+}): JSX.Element => {
+  const classes: Array<string> = [styles.menuToggle, 'fa'];
 
   if (isOpen) {
     classes.push('fa-times');

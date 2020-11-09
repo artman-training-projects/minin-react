@@ -8,8 +8,13 @@ interface IButton {
   onClick?: any;
 }
 
-const Button: React.FC<IButton> = ({ children, type, disabled, onClick }) => {
-  const classes = [styles.button, styles[type]];
+const Button: React.FC<IButton> = ({
+  children,
+  type,
+  disabled,
+  onClick,
+}): JSX.Element => {
+  const classes: Array<string> = [styles.button, styles[type]];
 
   return (
     <button className={classes.join(' ')} onClick={onClick} disabled={disabled}>

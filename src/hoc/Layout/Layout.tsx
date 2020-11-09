@@ -1,39 +1,25 @@
-import React, { Component, ReactChild } from 'react';
+import React, { useState } from 'react';
 import styles from './layout.module.css';
 import MenuToggle from '../../components/Navigation/MenuToggle';
 import Drawer from '../../components/Navigation/Drawer';
 
-class Layout extends Component<any, any> {
-  state = {
-    menu: false,
-  };
+const Layout: React.FC<React.PropsWithChildren<React.ReactFragment>> = ({
+  children,
+}): JSX.Element => {
+  const [isMenu, setIsMenu] = useState<boolean>(false);
 
-  toggleMenuHandler = () => {
-    this.setState({
-      menu: !this.state.menu,
-    });
-  };
+  const toggleMenuHandler: () => void = () => setIsMenu(!isMenu);
+  const menuCloseHandler: () => void = () => setIsMenu(false);
 
-  menuCloseHandler = () => {
-    this.setState({
-      menu: false,
-    });
-  };
+  return (
+    <div className={styles.layout}>
+      <Drawer isOpen={isMenu} onClose={menuCloseHandler} />
 
-  render() {
-    return (
-      <div className={styles.layout}>
-        <Drawer isOpen={this.state.menu} onClose={this.menuCloseHandler} />
+      <MenuToggle isOpen={isMenu} onToggle={toggleMenuHandler} />
 
-        <MenuToggle
-          isOpen={this.state.menu}
-          onToggle={this.toggleMenuHandler}
-        />
-
-        <main>{this.props.children}</main>
-      </div>
-    );
-  }
-}
+      <main>{children}</main>
+    </div>
+  );
+};
 
 export default Layout;

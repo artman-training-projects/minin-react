@@ -9,12 +9,15 @@ interface IFinishedQuiz {
   onRetry: any;
 }
 
-const FinishedQuiz: React.FC<IFinishedQuiz> = ({ results, quiz, onRetry }) => {
-  const successCount = Object.keys(results).reduce((total, key) => {
+const FinishedQuiz: React.FC<IFinishedQuiz> = ({
+  results,
+  quiz,
+  onRetry,
+}): JSX.Element => {
+  const successCount: number = Object.keys(results).reduce((total, key) => {
     if (results[key] === 'success') {
       total++;
     }
-
     return total;
   }, 0);
 
@@ -22,7 +25,7 @@ const FinishedQuiz: React.FC<IFinishedQuiz> = ({ results, quiz, onRetry }) => {
     <div className={styles.finishedQuiz}>
       <ul>
         {quiz.map((quizItem: any, i: any) => {
-          const classes = [
+          const classes: Array<string> = [
             'fa',
             results[quizItem.id] === 'error' ? 'fa-times' : 'fa-check',
             styles[results[quizItem.id]],

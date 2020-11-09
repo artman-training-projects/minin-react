@@ -18,7 +18,7 @@ const ActiveQuiz: React.FC<IActiveQuiz> = ({
   answerNumber,
   quizLength,
   answerState,
-}) => {
+}): JSX.Element => {
   return (
     <div className={styles.activeQuiz}>
       <p className={styles.question}>
