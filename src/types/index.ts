@@ -5,3 +5,4 @@ export type { default as IonAnswerClick } from './IonAnswerClick';
 export type { default as IAnswerState } from './IAnswerState';
 export type { default as IResults } from './IResults';
 export type { default as IQuiz } from './IQuiz';
+export type { default as ILinks } from './ILinks';

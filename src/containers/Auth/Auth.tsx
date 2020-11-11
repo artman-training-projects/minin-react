@@ -4,7 +4,7 @@ import styles from './auth.module.css';
 class Auth extends Component {
   render() {
     return (
-      <div>
+      <div className={styles.auth}>
         <h1>auth</h1>
       </div>
     );
