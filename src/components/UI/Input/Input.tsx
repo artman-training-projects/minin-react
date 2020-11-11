@@ -5,7 +5,7 @@ interface IInput {
   type?: string;
   label: string;
   value: string;
-  onChange: any;
+  onChange: (evt: any) => void;
   errorMessage: string;
   valid: boolean;
   touched: boolean;
