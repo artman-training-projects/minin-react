@@ -2,17 +2,21 @@ import React from 'react';
 import styles from './input.module.css';
 
 interface IInput {
-  type?: string;
+  type: string;
   label: string;
-  value?: any;
-  onChange?: any;
-  errorMessage?: any;
-  valid?: any;
-  touched?: any;
-  shouldValidate?: any;
+  value: string;
+  onChange: any;
+  errorMessage: string;
+  valid: boolean;
+  touched: boolean;
+  shouldValidate: boolean;
 }
 
-function isInvalid(valid: any, touched: any, shouldValidate: any) {
+function isInvalid(
+  valid: boolean,
+  touched: boolean,
+  shouldValidate: boolean
+): boolean {
   return !valid && shouldValidate && touched;
 }
 
@@ -25,7 +29,7 @@ const Input: React.FC<IInput> = ({
   valid,
   touched,
   shouldValidate,
-}) => {
+}): JSX.Element => {
   const inputType = type || 'text';
   const classes = [styles.input];
   const htmlFor = `${inputType}-${Math.random()}`;

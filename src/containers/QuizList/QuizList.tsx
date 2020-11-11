@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './quizList.module.css';
 
 class QuizList extends Component {
-  renderQuizes(): React.ReactFragment {
+  renderQuiz(): React.ReactFragment {
     return [1, 2, 3].map((quiz, index) => {
       return (
         <li key={index}>
@@ -13,13 +13,13 @@ class QuizList extends Component {
     });
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className={styles.quizList}>
         <div>
           <h1>Список тестов</h1>
 
-          <ul>{this.renderQuizes()}</ul>
+          <ul>{this.renderQuiz()}</ul>
         </div>
       </div>
     );
