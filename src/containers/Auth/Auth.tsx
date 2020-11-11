@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import styles from './auth.module.css';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
@@ -115,7 +115,7 @@ class Auth extends Component {
     evt.preventDefault();
   };
 
-  render(): JSX.Element {
+  render(): ReactNode {
     return (
       <div className={styles.auth}>
         <div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import styles from './quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz';
 import FinishedQuiz from '../../components/FinishedQuiz';
@@ -97,7 +97,7 @@ class Quiz extends Component {
     });
   };
 
-  render(): JSX.Element {
+  render(): ReactNode {
     return (
       <div className={styles.quiz}>
         <div className={styles.quizWrapper}>
