@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './input.module.css';
 
 interface IInput {
-  type: string;
+  type?: string;
   label: string;
   value: string;
   onChange: any;
