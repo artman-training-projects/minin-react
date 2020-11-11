@@ -36,9 +36,8 @@
   background-color: #ffffff;
   transition: all 0.3s;
 }
+
 .active,
 .drawer ul li a:hover {
   opacity: 0.7;
 }
-
-
