@@ -4,7 +4,7 @@ import styles from './quizCreator.module.css';
 class QuizCreator extends Component {
   render() {
     return (
-      <div>
+      <div className={styles.quizCreator}>
         <h1>quiz creator</h1>
       </div>
     );

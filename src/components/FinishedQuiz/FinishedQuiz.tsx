@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './finishedQuiz.module.css';
 import Button from '../UI/Button';
 import { IQuiz, IResults } from '../../types';
@@ -49,7 +50,9 @@ const FinishedQuiz: React.FC<IFinishedQuiz> = ({
         <Button onClick={onRetry} type="primary">
           Повторить
         </Button>
-        <Button type="success">Перейти в список тестов</Button>
+        <Link to="/">
+          <Button type="success">Перейти в список тестов</Button>
+        </Link>
       </div>
     </div>
   );

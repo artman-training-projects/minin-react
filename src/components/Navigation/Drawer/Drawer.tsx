@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './drawer.module.css';
 import Backdrop from '../../UI/Backdrop';
 import { NavLink } from 'react-router-dom';
+import { ILinks } from '../../../types';
 
-const links: any[] = [
+const links: ILinks[] = [
   { to: '/', title: 'Список', exact: true },
   { to: '/auth', title: 'Авторизация', exact: false },
   { to: '/quiz-creator', title: 'Создать тест', exact: false },
