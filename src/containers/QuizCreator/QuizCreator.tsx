@@ -98,7 +98,7 @@ class QuizCreator extends Component {
     // TODO Server
   };
 
-  changeHandler = (value: string, controlName: string): any => {
+  changeHandler = (value: string, controlName: string): void => {
     const formControls = { ...this.state.formControls };
     const control = { ...formControls[controlName] };
 
@@ -113,7 +113,7 @@ class QuizCreator extends Component {
     });
   };
 
-  renderInputs = () => {
+  renderInputs = (): React.ReactNode => {
     return Object.keys(this.state.formControls).map((controlName, index) => {
       const control = this.state.formControls[controlName];
 
