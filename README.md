@@ -1,4 +1,5 @@
-# React JS 2020 <br /> <p font-size="2">автор Владилен Минин</p>
+# React JS 2020 <br />
+<p font-size="2">автор Владилен Минин</p>
 <details>
 <summary>Материалы курса</summary>
 1. Что такое React.<br />
