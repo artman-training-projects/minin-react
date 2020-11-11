@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from './drawer.module.css';
 import Backdrop from '../../UI/Backdrop';
+import { NavLink } from 'react-router-dom';
 
-const links: number[] = [1, 2, 3];
+const links: any[] = [
+  { to: '/', title: 'Список', exact: true },
+  { to: '/auth', title: 'Авторизация', exact: false },
+  { to: '/quiz-creator', title: 'Создать тест', exact: false },
+];
 
 interface IDrawer {
   isOpen: boolean;
@@ -16,13 +21,24 @@ const Drawer: React.FC<IDrawer> = ({ isOpen, onClose }): JSX.Element => {
     classes.push(styles.close);
   }
 
+  const clickHandler = () => {
+    onClose();
+  };
+
   return (
     <>
       <nav className={classes.join(' ')}>
         <ul>
           {links.map((link, index) => (
             <li key={index}>
-              <a href="#">Link {link}</a>
+              <NavLink
+                to={link.to}
+                exact={link.exact}
+                activeClassName={styles.active}
+                onClick={clickHandler}
+              >
+                {link.title}
+              </NavLink>
             </li>
           ))}
         </ul>
