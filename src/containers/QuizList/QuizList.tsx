@@ -1,23 +1,43 @@
 import React, { Component, ReactNode } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import styles from './quizList.module.css';
 
 class QuizList extends Component {
+  state: any = {
+    quiz: [],
+  };
+
   renderQuiz(): React.ReactFragment {
-    return [1, 2, 3].map((quiz, index) => {
+    return this.state.quiz.map((quiz: any) => {
       return (
-        <li key={index}>
-          <NavLink to={'/quiz/' + quiz}>test {quiz}</NavLink>
+        <li key={quiz.id}>
+          <NavLink to={'/quiz/' + quiz.id}>{quiz.name}</NavLink>
         </li>
       );
     });
   }
 
-  componentDidMount() {
-    axios
-      .get('https://react-quiz-test-2e76e.firebaseio.com/quiz.json')
-      .then((response) => console.log(response));
+  async componentDidMount() {
+    try {
+      const response = await axios.get(
+        'https://react-quiz-test-2e76e.firebaseio.com/quizes.json'
+      );
+
+      const quiz: any = [];
+      Object.keys(response.data).forEach((key, index) => {
+        quiz.push({
+          id: key,
+          name: `Тест №${index + 1}`,
+        });
+      });
+
+      this.setState({
+        quiz,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render(): ReactNode {
