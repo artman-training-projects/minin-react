@@ -20,7 +20,7 @@ const AnswerItem: React.FC<IAnswerItem> = ({
 
   return (
     <li className={classes.join(' ')} onClick={() => onAnswerClick(answer.id)}>
-      {answer.text}
+      {answer.test}
     </li>
   );
 };
