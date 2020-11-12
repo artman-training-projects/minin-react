@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import axios from 'axios';
+import axios from '../../axios/axios-quiz';
 import styles from './quizCreator.module.css';
 import Button from '../../components/UI/Button';
 import { createControl, validate, validateForm } from '../../form/formFrame';
@@ -97,10 +97,7 @@ class QuizCreator extends Component {
     evt.preventDefault();
 
     try {
-      await axios.post(
-        'https://react-quiz-test-2e76e.firebaseio.com/quizes.json',
-        this.state.quiz
-      );
+      await axios.post('/quizes.json', this.state.quiz);
       this.setState({
         quiz: [],
         isFormValid: false,

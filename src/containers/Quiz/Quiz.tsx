@@ -3,6 +3,8 @@ import styles from './quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz';
 import FinishedQuiz from '../../components/FinishedQuiz';
 import { IonAnswerClick, IQuiz, IResults } from '../../types';
+import axios from '../../axios/axios-quiz';
+import Loader from '../../components/UI/Loader';
 
 class Quiz extends Component {
   state: any = {
@@ -10,30 +12,8 @@ class Quiz extends Component {
     isFinished: false,
     activeQuestion: 0,
     answerState: null,
-    quiz: [
-      {
-        question: 'Какого цвета небо?',
-        rightAnswerId: 2,
-        id: 1,
-        answers: [
-          { text: 'Чёрный', id: 1 },
-          { text: 'Синий', id: 2 },
-          { text: 'Красный', id: 3 },
-          { text: 'Зелёный', id: 4 },
-        ],
-      },
-      {
-        question: 'В каком году основали Санкт-Петербург',
-        rightAnswerId: 3,
-        id: 2,
-        answers: [
-          { text: '1700', id: 1 },
-          { text: '1702', id: 2 },
-          { text: '1703', id: 3 },
-          { text: '1803', id: 4 },
-        ],
-      },
-    ],
+    quiz: [],
+    loading: true,
   };
 
   onAnswerClickHandler: IonAnswerClick = (answerId: number) => {
@@ -97,13 +77,33 @@ class Quiz extends Component {
     });
   };
 
+  async componentDidMount() {
+    try {
+      const response = await axios.get(
+        // @ts-ignore
+        `/quizes/${this.props.match.params.id}.json`
+      );
+
+      const quiz = response.data;
+
+      this.setState({
+        quiz,
+        loading: false,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   render(): ReactNode {
     return (
       <div className={styles.quiz}>
         <div className={styles.quizWrapper}>
           <h1>Ответьте на все вопросы</h1>
 
-          {this.state.isFinished ? (
+          {this.state.loading ? (
+            <Loader />
+          ) : this.state.isFinished ? (
             <FinishedQuiz
               results={this.state.results}
               quiz={this.state.quiz}
