@@ -2,10 +2,12 @@ import React, { Component, ReactNode } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import styles from './quizList.module.css';
+import Loader from '../../components/UI/Loader';
 
 class QuizList extends Component {
   state: any = {
     quiz: [],
+    loading: true,
   };
 
   renderQuiz(): React.ReactFragment {
@@ -34,6 +36,7 @@ class QuizList extends Component {
 
       this.setState({
         quiz,
+        loading: false,
       });
     } catch (err) {
       console.log(err);
@@ -46,7 +49,7 @@ class QuizList extends Component {
         <div>
           <h1>Список тестов</h1>
 
-          <ul>{this.renderQuiz()}</ul>
+          {this.state.loading ? <Loader /> : <ul>{this.renderQuiz()}</ul>}
         </div>
       </div>
     );
