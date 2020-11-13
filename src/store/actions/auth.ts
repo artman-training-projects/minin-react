@@ -42,7 +42,7 @@ export function authSuccess(token: any) {
 export function autoLogout(time: any) {
   return (dispatch: any) => {
     setTimeout(() => {
-      dispatch(logout);
+      dispatch(logout());
     }, time * 1000);
   };
 }
@@ -54,5 +54,27 @@ export function logout() {
 
   return {
     type: AUTH_LOGOUT,
+  };
+}
+
+export function autoLogin() {
+  return (dispatch: any) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      dispatch(logout());
+    } else {
+      const expirationDate: any = new Date(
+        localStorage.getItem('expirationDate') as any
+      );
+
+      if (expirationDate <= new Date()) {
+        dispatch(logout());
+      } else {
+        dispatch(authSuccess(token));
+        dispatch(
+          autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000)
+        );
+      }
+    }
   };
 }

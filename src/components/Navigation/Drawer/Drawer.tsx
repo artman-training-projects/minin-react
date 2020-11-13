@@ -4,18 +4,17 @@ import Backdrop from '../../UI/Backdrop';
 import { NavLink } from 'react-router-dom';
 import { ILinks } from '../../../types';
 
-const links: ILinks[] = [
-  { to: '/', title: 'Список', exact: true },
-  { to: '/auth', title: 'Авторизация', exact: false },
-  { to: '/quiz-creator', title: 'Создать тест', exact: false },
-];
-
 interface IDrawer {
+  isAuth: boolean;
   isOpen: boolean;
   onClose: () => void;
 }
 
-const Drawer: React.FC<IDrawer> = ({ isOpen, onClose }): JSX.Element => {
+const Drawer: React.FC<IDrawer> = ({
+  isAuth,
+  isOpen,
+  onClose,
+}): JSX.Element => {
   const classes: Array<string> = [styles.drawer];
 
   if (!isOpen) {
@@ -25,6 +24,15 @@ const Drawer: React.FC<IDrawer> = ({ isOpen, onClose }): JSX.Element => {
   const clickHandler = () => {
     onClose();
   };
+
+  const links: ILinks[] = [{ to: '/', title: 'Список', exact: true }];
+
+  if (isAuth) {
+    links.push({ to: '/quiz-creator', title: 'Создать тест', exact: false });
+    links.push({ to: '/logout', title: 'Выйти', exact: false });
+  } else {
+    links.push({ to: '/auth', title: 'Авторизация', exact: false });
+  }
 
   return (
     <>
