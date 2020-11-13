@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import styles from './layout.module.css';
 import MenuToggle from '../../components/Navigation/MenuToggle';
 import Drawer from '../../components/Navigation/Drawer';
+import { connect } from 'react-redux';
 
-const Layout: React.FC<React.PropsWithChildren<React.ReactFragment>> = ({
-  children,
-}): JSX.Element => {
+const Layout: React.FC<PropsWithChildren<any>> = (props): JSX.Element => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
 
   const toggleMenuHandler: () => void = () => setIsMenu(!isMenu);
@@ -13,13 +12,23 @@ const Layout: React.FC<React.PropsWithChildren<React.ReactFragment>> = ({
 
   return (
     <div className={styles.layout}>
-      <Drawer isOpen={isMenu} onClose={menuCloseHandler} />
+      <Drawer
+        isOpen={isMenu}
+        onClose={menuCloseHandler}
+        isAuth={props.isAuth}
+      />
 
       <MenuToggle isOpen={isMenu} onToggle={toggleMenuHandler} />
 
-      <main>{children}</main>
+      <main>{props.children}</main>
     </div>
   );
 };
 
-export default Layout;
+function mapStateToProps(state: any) {
+  return {
+    isAuth: !!state.auth.token,
+  };
+}
+
+export default connect(mapStateToProps)(Layout);
