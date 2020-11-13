@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styles from './quizList.module.css';
@@ -20,7 +20,7 @@ class QuizList extends Component<any, any> {
     this.props.fetchQuiz();
   }
 
-  render(): JSX.Element {
+  render(): ReactNode {
     return (
       <div className={styles.quizList}>
         <div>
