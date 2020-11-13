@@ -11,7 +11,7 @@ import {
 } from './actionsTypes';
 import { IQuiz, IResults } from '../../types';
 
-export default function fetchQuiz() {
+export function fetchQuiz() {
   return async (dispatch: any) => {
     dispatch(fetchQuizStart());
 
