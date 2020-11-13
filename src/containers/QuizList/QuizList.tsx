@@ -1,17 +1,13 @@
-import React, { Component, ReactNode } from 'react';
-import axios from '../../axios/axios-quiz';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styles from './quizList.module.css';
 import Loader from '../../components/UI/Loader';
+import fetchQuiz from '../../store/actions/quiz';
 
-class QuizList extends Component {
-  state: any = {
-    quiz: [],
-    loading: true,
-  };
-
+class QuizList extends Component<any, any> {
   renderQuiz(): React.ReactFragment {
-    return this.state.quiz.map((quiz: any) => {
+    return this.props.quiz.map((quiz: any) => {
       return (
         <li key={quiz.id}>
           <NavLink to={'/quiz/' + quiz.id}>{quiz.name}</NavLink>
@@ -20,38 +16,38 @@ class QuizList extends Component {
     });
   }
 
-  async componentDidMount() {
-    try {
-      const response = await axios.get('/quizes.json');
-
-      const quiz: any = [];
-      Object.keys(response.data).forEach((key, index) => {
-        quiz.push({
-          id: key,
-          name: `Тест №${index + 1}`,
-        });
-      });
-
-      this.setState({
-        quiz,
-        loading: false,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  componentDidMount() {
+    this.props.fetchQuiz();
   }
 
-  render(): ReactNode {
+  render(): JSX.Element {
     return (
       <div className={styles.quizList}>
         <div>
           <h1>Список тестов</h1>
 
-          {this.state.loading ? <Loader /> : <ul>{this.renderQuiz()}</ul>}
+          {this.props.loading && this.props.quiz.length !== 0 ? (
+            <Loader />
+          ) : (
+            <ul>{this.renderQuiz()}</ul>
+          )}
         </div>
       </div>
     );
   }
 }
 
-export default QuizList;
+function mapStateToProps(state: any) {
+  return {
+    quiz: state.quiz.quiz,
+    loading: state.quiz.loading,
+  };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    fetchQuiz: () => dispatch(fetchQuiz()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizList);
