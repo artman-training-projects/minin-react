@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styles from './quizList.module.css';
 import Loader from '../../components/UI/Loader';
-import fetchQuiz from '../../store/actions/quiz';
+import { fetchQuiz } from '../../store/actions/quiz';
 
 class QuizList extends Component<any, any> {
   renderQuiz(): React.ReactFragment {
