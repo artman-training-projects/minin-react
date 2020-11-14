@@ -1,20 +1,24 @@
+import { IAction } from '../../types/interfaces';
 import axios from 'axios';
 import { AUTH_LOGOUT, AUTH_SUCCESS } from './actionsTypes';
+import { APP_URL } from '../../types/enums';
 
-export function auth(email: any, password: any, isLogin: any) {
-  return async (dispatch: any) => {
+export function auth(
+  email: string,
+  password: string,
+  isLogin: boolean
+): Function {
+  return async (dispatch: Function) => {
     const authData = {
       email,
       password,
       returnSecureToken: isLogin,
     };
 
-    let url =
-      'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAKruUdui8MZ3785x_Uar70wTaEqDkuvig';
+    let url = APP_URL.signIn;
 
     if (isLogin) {
-      url =
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAKruUdui8MZ3785x_Uar70wTaEqDkuvig';
+      url = APP_URL.signVer;
     }
 
     const response = await axios.post(url, authData);
@@ -32,22 +36,22 @@ export function auth(email: any, password: any, isLogin: any) {
   };
 }
 
-export function authSuccess(token: any) {
+export function authSuccess(token: string): IAction {
   return {
     type: AUTH_SUCCESS,
     token,
   };
 }
 
-export function autoLogout(time: any) {
-  return (dispatch: any) => {
+export function autoLogout(time: number): Function {
+  return (dispatch: Function) => {
     setTimeout(() => {
       dispatch(logout());
     }, time * 1000);
   };
 }
 
-export function logout() {
+export function logout(): IAction {
   localStorage.removeItem('token');
   localStorage.removeItem('userId');
   localStorage.removeItem('expirationDate');
@@ -57,13 +61,13 @@ export function logout() {
   };
 }
 
-export function autoLogin() {
-  return (dispatch: any) => {
+export function autoLogin(): Function {
+  return (dispatch: Function) => {
     const token = localStorage.getItem('token');
     if (!token) {
       dispatch(logout());
     } else {
-      const expirationDate: any = new Date(
+      const expirationDate: Date = new Date(
         localStorage.getItem('expirationDate') as any
       );
 

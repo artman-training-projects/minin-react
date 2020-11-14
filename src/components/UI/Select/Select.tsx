@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './select.module.css';
+import { IOption } from '../../../types/interfaces';
 
 interface ISelect {
   label: string;
   value: number;
   onChange: (evt: any) => void;
-  options: { text: string; value: number }[];
+  options: Array<IOption>;
 }
 
 const Select: React.FC<ISelect> = ({

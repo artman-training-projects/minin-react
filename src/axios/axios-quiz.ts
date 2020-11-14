@@ -1,5 +1,6 @@
 import axios from 'axios';
+import { APP_URL } from '../types/enums';
 
 export default axios.create({
-  baseURL: 'https://react-quiz-test-2e76e.firebaseio.com',
+  baseURL: APP_URL.base,
 });

@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './answerItem.module.css';
-import { IAnswer, IonAnswerClick } from '../../../types';
+import { IAnswer } from '../../../types/interfaces';
 
 interface IAnswerItem {
   answer: IAnswer;
-  onAnswerClick: IonAnswerClick;
+  onAnswerClick: Function;
   answerState: string | null;
 }
 

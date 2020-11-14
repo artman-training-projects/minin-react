@@ -4,20 +4,21 @@ import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import { connect } from 'react-redux';
 import { auth } from '../../store/actions/auth';
+import { IState } from '../../types/interfaces';
 
-function validateEmail(email: any): boolean {
+function validateEmail(email: string): boolean {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
 
-interface IValidation {
+interface IValidationEmail {
   required: boolean;
   email?: boolean;
   minLength?: number;
 }
 
 class Auth extends Component<any, any> {
-  state: any = {
+  state: IState = {
     isFormValid: false,
     formControls: {
       email: {
@@ -47,7 +48,7 @@ class Auth extends Component<any, any> {
     },
   };
 
-  renderInputs = () => {
+  renderInputs = (): Array<JSX.Element> => {
     return Object.keys(this.state.formControls).map((controlName, index) => {
       const control = this.state.formControls[controlName];
       return (
@@ -66,7 +67,7 @@ class Auth extends Component<any, any> {
     });
   };
 
-  validateControl = (value: string, validation: IValidation): boolean => {
+  validateControl = (value: string, validation: IValidationEmail): boolean => {
     if (!validation) {
       return true;
     }
@@ -109,7 +110,7 @@ class Auth extends Component<any, any> {
     });
   };
 
-  loginHandler = () => {
+  loginHandler = (): void => {
     this.props.auth(
       this.state.formControls.email.value,
       this.state.formControls.password.value,
@@ -117,7 +118,7 @@ class Auth extends Component<any, any> {
     );
   };
 
-  registerHandler = () => {
+  registerHandler = (): void => {
     this.props.auth(
       this.state.formControls.email.value,
       this.state.formControls.password.value,
@@ -158,9 +159,9 @@ class Auth extends Component<any, any> {
   }
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Function): IState {
   return {
-    auth: (email: any, password: any, isLogin: any) =>
+    auth: (email: string, password: string, isLogin: boolean) =>
       dispatch(auth(email, password, isLogin)),
   };
 }

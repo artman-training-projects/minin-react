@@ -1,13 +1,17 @@
+import { IAction, IState } from '../../types/interfaces';
 import {
   CREATE_QUIZ_QUESTION,
   RESET_QUIZ_CREATION,
 } from '../actions/actionsTypes';
 
-const initialState: any = {
+const initialState: IState = {
   quiz: [],
 };
 
-export default function createReducer(state = initialState, action: any) {
+export default function createReducer(
+  state: IState = initialState,
+  action: IAction
+) {
   switch (action.type) {
     case CREATE_QUIZ_QUESTION:
       return {

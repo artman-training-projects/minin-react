@@ -3,12 +3,12 @@ import styles from './input.module.css';
 
 interface IInput {
   type?: string;
-  label: string;
-  value: string;
   onChange: (evt: any) => void;
+  label: string;
   errorMessage: string;
   valid: boolean;
   touched: boolean;
+  value: string;
   shouldValidate: boolean;
 }
 
