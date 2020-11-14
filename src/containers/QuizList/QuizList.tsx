@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './quizList.module.css';
 import Loader from '../../components/UI/Loader';
 import { fetchQuiz } from '../../store/actions/quiz';
+import { IState } from '../../types/interfaces';
 
 class QuizList extends Component<any, any> {
   renderQuiz(): React.ReactFragment {
@@ -37,14 +38,14 @@ class QuizList extends Component<any, any> {
   }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: IState): IState {
   return {
     quiz: state.quiz.quiz,
     loading: state.quiz.loading,
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Function): IState {
   return {
     fetchQuiz: () => dispatch(fetchQuiz()),
   };

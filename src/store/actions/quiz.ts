@@ -1,3 +1,9 @@
+import {
+  IResults,
+  IAction,
+  IQuestionItem,
+  IState,
+} from '../../types/interfaces';
 import axios from '../../axios/axios-quiz';
 import {
   FETCH_QUIZ_ERROR,
@@ -9,10 +15,9 @@ import {
   QUIZ_RETRY,
   QUIZ_SET_STATE,
 } from './actionsTypes';
-import { IQuiz, IResults } from '../../types';
 
-export function fetchQuiz() {
-  return async (dispatch: any) => {
+export function fetchQuiz(): Function {
+  return async (dispatch: Function) => {
     dispatch(fetchQuizStart());
 
     try {
@@ -33,8 +38,8 @@ export function fetchQuiz() {
   };
 }
 
-export function fetchQuizById(quizId: any) {
-  return async (dispatch: any) => {
+export function fetchQuizById(quizId: string): Function {
+  return async (dispatch: Function) => {
     dispatch(fetchQuizStart());
 
     try {
@@ -49,15 +54,15 @@ export function fetchQuizById(quizId: any) {
   };
 }
 
-export function fetchQuizisSuccess(quizis: any) {
+export function fetchQuizisSuccess(quizis: Array<IQuestionItem>): IState {
   return {
     type: FETCH_QUIZIS_SUCCESS,
     quizis,
   };
 }
 
-export function quizAnswerClick(answerId: any) {
-  return (dispatch: any, getState: any) => {
+export function quizAnswerClick(answerId: number): Function {
+  return (dispatch: Function, getState: Function) => {
     const state = getState().quiz;
 
     if (state.answerState) {
@@ -67,7 +72,7 @@ export function quizAnswerClick(answerId: any) {
       }
     }
 
-    const question: IQuiz = state.quizis[state.activeQuestion];
+    const question: IQuestionItem = state.quizis[state.activeQuestion];
     const results: IResults = state.results;
 
     if (question.rightAnswerId === answerId) {
@@ -107,7 +112,7 @@ export function quizAnswerClick(answerId: any) {
   };
 }
 
-export function quizSetState(answerState: any, results: any) {
+export function quizSetState(answerState: any, results: any): IAction {
   return {
     type: QUIZ_SET_STATE,
     answerState,
@@ -115,43 +120,43 @@ export function quizSetState(answerState: any, results: any) {
   };
 }
 
-export function isQuizFinished(state: any) {
+export function isQuizFinished(state: IState): Boolean {
   return state.activeQuestion + 1 === state.quizis.length;
 }
 
-export function finishQuiz() {
+export function finishQuiz(): IAction {
   return {
     type: FINISH_QUIZ,
   };
 }
 
-export function retryQuiz() {
+export function retryQuiz(): IAction {
   return {
     type: QUIZ_RETRY,
   };
 }
 
-export function quizNextQuestion(number: any) {
+export function quizNextQuestion(number: any): IAction {
   return {
     type: QUIZ_NEXT_QUESTION,
     number,
   };
 }
 
-export function fetchQuizStart() {
+export function fetchQuizStart(): IAction {
   return {
     type: FETCH_QUIZ_START,
   };
 }
 
-export function fetchQuizSuccess(quiz: any) {
+export function fetchQuizSuccess(quiz: any): IAction {
   return {
     type: FETCH_QUIZ_SUCCESS,
     quiz,
   };
 }
 
-export function fetchQuizError(err: any) {
+export function fetchQuizError(err: any): IAction {
   return {
     type: FETCH_QUIZ_ERROR,
     err,

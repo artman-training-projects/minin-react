@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './drawer.module.css';
 import Backdrop from '../../UI/Backdrop';
 import { NavLink } from 'react-router-dom';
-import { ILinks } from '../../../types';
+import { ILinks } from '../../../types/interfaces';
 
 interface IDrawer {
-  isAuth: boolean;
+  isAuth?: boolean;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -25,7 +25,7 @@ const Drawer: React.FC<IDrawer> = ({
     onClose();
   };
 
-  const links: ILinks[] = [{ to: '/', title: 'Список', exact: true }];
+  const links: Array<ILinks> = [{ to: '/', title: 'Список', exact: true }];
 
   if (isAuth) {
     links.push({ to: '/quiz-creator', title: 'Создать тест', exact: false });

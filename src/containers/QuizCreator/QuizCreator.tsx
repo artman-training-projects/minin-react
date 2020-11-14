@@ -10,6 +10,7 @@ import {
   createQuizQuestion,
   finishCreateQuiz,
 } from '../../store/actions/create';
+import { IQuestionItem, IState } from '../../types/interfaces';
 
 function createOptionControl(number: number): any {
   return createControl(
@@ -60,7 +61,7 @@ class QuizCreator extends Component<any, any> {
       option4,
     } = this.state.formControls;
 
-    const questionItem = {
+    const questionItem: IQuestionItem = {
       question: question.value,
       id: this.props.quiz.length + 1,
       rightAnswerId: this.state.rightAnswerId,
@@ -93,7 +94,7 @@ class QuizCreator extends Component<any, any> {
     });
   };
 
-  createQuizHandler = (evt: any) => {
+  createQuizHandler = (evt: any): void => {
     evt.preventDefault();
 
     this.setState({
@@ -190,13 +191,13 @@ class QuizCreator extends Component<any, any> {
   }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: IState): IState {
   return {
     quiz: state.create.quiz,
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Function): IState {
   return {
     createQuizQuestion: (item: any) => dispatch(createQuizQuestion(item)),
     finishCreateQuiz: () => dispatch(finishCreateQuiz()),

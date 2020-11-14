@@ -1,14 +1,15 @@
 import React from 'react';
 import styles from './activeQuiz.module.css';
 import AnswersList from './AnswersList';
-import { IAnswers, IQuestion, IonAnswerClick, IAnswerState } from '../../types';
+import { IAnswer, IResults } from '../../types/interfaces';
 
-interface IActiveQuiz extends IAnswers {
-  question: IQuestion;
-  onAnswerClick: IonAnswerClick;
+interface IActiveQuiz {
+  answers: Array<IAnswer>;
+  question: string;
+  onAnswerClick: Function;
   answerNumber: number;
   quizLength: number;
-  answerState: IAnswerState | null;
+  answerState: IResults | null;
 }
 
 const ActiveQuiz: React.FC<IActiveQuiz> = ({

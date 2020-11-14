@@ -1,10 +1,14 @@
+import { IAction, IState } from '../../types/interfaces';
 import { AUTH_LOGOUT, AUTH_SUCCESS } from '../actions/actionsTypes';
 
-const initialState: any = {
+const initialState: IState = {
   token: null,
 };
 
-export default function authReducer(state = initialState, action: any) {
+export default function authReducer(
+  state: IState = initialState,
+  action: IAction
+) {
   switch (action.type) {
     case AUTH_SUCCESS:
       return {

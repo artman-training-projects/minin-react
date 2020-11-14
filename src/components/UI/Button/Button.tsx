@@ -5,7 +5,7 @@ interface IButton {
   children: ReactChild;
   type: string;
   disabled?: boolean;
-  onClick?: any;
+  onClick?: (evt: any) => void;
 }
 
 const Button: React.FC<IButton> = ({

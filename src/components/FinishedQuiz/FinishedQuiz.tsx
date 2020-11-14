@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './finishedQuiz.module.css';
 import Button from '../UI/Button';
-import { IQuiz, IResults } from '../../types';
+import { IQuestionItem, IResults } from '../../types/interfaces';
 
 interface IFinishedQuiz {
   results: IResults;
-  quiz: IQuiz[];
-  onRetry: any;
+  quiz: Array<IQuestionItem>;
+  onRetry: () => void;
 }
 
 const FinishedQuiz: React.FC<IFinishedQuiz> = ({

@@ -9,6 +9,7 @@ import {
   quizAnswerClick,
   retryQuiz,
 } from '../../store/actions/quiz';
+import { IState } from '../../types/interfaces';
 
 class Quiz extends Component<any, any> {
   componentDidMount() {
@@ -49,7 +50,7 @@ class Quiz extends Component<any, any> {
   }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: IState): IState {
   return {
     results: state.quiz.results,
     isFinished: state.quiz.isFinished,
@@ -60,10 +61,10 @@ function mapStateToProps(state: any) {
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Function): IState {
   return {
-    fetchQuizById: (id: any) => dispatch(fetchQuizById(id)),
-    quizAnswerClick: (answerId: any) => dispatch(quizAnswerClick(answerId)),
+    fetchQuizById: (id: string) => dispatch(fetchQuizById(id)),
+    quizAnswerClick: (answerId: number) => dispatch(quizAnswerClick(answerId)),
     retryQuiz: () => dispatch(retryQuiz()),
   };
 }

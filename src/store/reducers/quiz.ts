@@ -1,3 +1,4 @@
+import { IAction, IState } from '../../types/interfaces';
 import {
   FETCH_QUIZ_ERROR,
   FETCH_QUIZ_START,
@@ -9,7 +10,7 @@ import {
   QUIZ_SET_STATE,
 } from '../actions/actionsTypes';
 
-const initialState: any = {
+const initialState: IState = {
   quiz: [],
   loading: false,
   error: null,
@@ -20,7 +21,10 @@ const initialState: any = {
   quizis: null,
 };
 
-export default function quizReducer(state = initialState, action: any) {
+export default function quizReducer(
+  state: IState = initialState,
+  action: IAction
+) {
   switch (action.type) {
     case FETCH_QUIZ_START:
       return {

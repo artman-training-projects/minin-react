@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './answersList.module.css';
 import AnswerItem from '../AnswerItem';
-import { IAnswers, IonAnswerClick, IAnswerState } from '../../../types';
+import { IAnswer, IResults } from '../../../types/interfaces';
 
-interface IAnswersList extends IAnswers {
-  onAnswerClick: IonAnswerClick;
-  answerState: IAnswerState | null;
+interface IAnswersList {
+  answers: Array<IAnswer>;
+  onAnswerClick: Function;
+  answerState: IResults | null;
 }
 
 const AnswersList: React.FC<IAnswersList> = ({

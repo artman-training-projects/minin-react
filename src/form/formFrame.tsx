@@ -1,4 +1,10 @@
-export function createControl(config: any, validation: any): any {
+import { TValidation } from '../types/types';
+import { IConfigControl, IFormControls } from '../types/interfaces';
+
+export function createControl(
+  config: IConfigControl,
+  validation: TValidation
+): any {
   return {
     ...config,
     validation,
@@ -8,7 +14,10 @@ export function createControl(config: any, validation: any): any {
   };
 }
 
-export function validate(value: string, validation: any = null): boolean {
+export function validate(
+  value: string,
+  validation: TValidation = null
+): boolean {
   if (!validation) {
     return true;
   }
@@ -22,7 +31,7 @@ export function validate(value: string, validation: any = null): boolean {
   return isValid;
 }
 
-export function validateForm(formControls: any): boolean {
+export function validateForm(formControls: IFormControls): boolean {
   let isFormValid = true;
 
   for (let control in formControls) {
